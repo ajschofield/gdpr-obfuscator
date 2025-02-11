@@ -4,13 +4,29 @@
 from csv_reader import csv_reader
 
 def test_empty_csv_should_return_no_content():
-    pass
+    content = ""
+    result = csv_reader(content)
+    expected = []
+    assert result == expected
 
 def test_csv_with_header_only_should_return_no_content():
-    pass
+    content = "student_id,name,course\n"
+    result = csv_reader(content)
+    expected = []
+    assert result == expected
 
-def test_csv_with_valid_data_should_return_obfuscated_content():
-    pass
+def test_csv_with_valid_data():
+    content = (
+        "student_id,name,course\n"
+        "1234,Student 1,Course 1\n"
+        "5678,Student 2,Course 2\n"
+        )
+    result = csv_reader(content)
+    expected = [
+        {"student_id": "1234", "name": "Student 1", "course": "Course 1"},
+        {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
+        ]
+    assert result == expected 
 
 def test_csv_with_quoted_fields_should_be_sanitised():
     pass

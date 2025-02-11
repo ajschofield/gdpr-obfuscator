@@ -1,7 +1,7 @@
 # csv_reader.py - tests
 # Author: Alex Schofield
 
-from csv_reader import csv_reader
+from main import csv_reader
 import pytest
 
 def test_empty_csv_should_return_no_content():

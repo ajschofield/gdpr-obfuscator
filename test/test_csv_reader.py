@@ -29,7 +29,7 @@ def test_csv_with_valid_data():
         ]
     assert result == expected 
 
-def test_csv_with_quoted_fields_should_be_sanitised():
+def test_csv_with_quoted_fields_should_run_as_expected():
     content = (
         'student_id,name,course\n'
         '1234,"Student 1","Course 1"\n'
@@ -41,28 +41,3 @@ def test_csv_with_quoted_fields_should_be_sanitised():
         {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
     ]
     assert result == expected
-
-@pytest.mark.skip(reason="Not implemented yet")
-def test_non_csv_file_should_return_no_content():
-    pass
-
-@pytest.mark.skip(reason="Not implemented yet")
-def test_csv_file_with_embedded_newline_should_be_sanitised():
-    pass
-
-@pytest.mark.skip(reason="Not implemented yet")
-def test_csv_file_with_embedded_comma_should_be_sanitised():
-    pass
-
-@pytest.mark.skip(reason="Not implemented yet")
-def test_csv_file_with_embedded_quote_should_be_sanitised():
-    pass
-
-@pytest.mark.skip(reason="Not implemented yet")
-def test_csv_file_with_null_values_should_be_transformed_to_empty_string():
-    pass
-
-@pytest.mark.skip(reason="Not implemented yet")
-def test_csv_file_with_non_string_data_should_be_transformed_to_empty_string():
-    pass
-

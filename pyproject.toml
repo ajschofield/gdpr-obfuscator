@@ -12,7 +12,7 @@ dependencies = [
 
 [tool.poetry]
 packages = [
-    { include = "gdpr-obfuscator", from = "src" }
+    { include = "gdpr-obfuscator", from = "obfuscator" }
 ]
 
 [tool.poetry.group.dev.dependencies]

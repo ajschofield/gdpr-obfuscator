@@ -3,9 +3,16 @@ from obfuscator.csv_reader import read
 
 def main():
     parser = argparse.ArgumentParser(description="gdpr-obfuscator")
-    parser.add_argument("--local", help="Path to local CSV file")
-    parser.add_argument("--s3", help="Path to S3 object for CSV file")
+    # Require user to either choose a local file or an S3 object
+    loc = parser.add_mutually_exclusive_group(required=True)
+    loc.add_argument("--local")
+    loc.add_argument("--s3")
     args = parser.parse_args()
+
+    if args.local and not args.s3:
+        print(read(args.local))
+    else:
+        pass
 
 if __name__ == "__main__":
     main()

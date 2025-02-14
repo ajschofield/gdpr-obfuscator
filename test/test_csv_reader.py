@@ -8,6 +8,7 @@ reader = CSVReader()
 
 ### TODO : TESTS ARE BROKEN, FIX THEM IN NEXT BRANCH ###
 
+
 def test_empty_csv_should_return_no_content():
     content = ""
     result = csv_reader(content)

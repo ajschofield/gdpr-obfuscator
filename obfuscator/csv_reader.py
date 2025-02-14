@@ -1,15 +1,8 @@
 import csv
 from typing import List, Dict
-import logging
+from logger import get_logger
 
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-if not logger.handlers:
-    handler = logging.StreamHandler()
-    formatter = logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
-
+logger = get_logger("CSVReader")
 
 class CSVReader:
     def __init__(self, path: str):

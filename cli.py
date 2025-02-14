@@ -1,5 +1,8 @@
 import argparse
 from obfuscator.csv_reader import CSVReader
+from obfuscator.logger import get_logger
+
+logger = get_logger("CLI")
 
 def main():
     parser = argparse.ArgumentParser(description="gdpr-obfuscator")
@@ -10,11 +13,12 @@ def main():
     args = parser.parse_args()
 
     if args.local and not args.s3:
+        logger.debug("User chose to read CSV from local path")
         reader = CSVReader(args.local)
         data = reader.read_local()
         print(data)
     else:
-        pass
+        logger.debug("User chose to read CSV from S3")
 
 if __name__ == "__main__":
     main()

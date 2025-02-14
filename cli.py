@@ -1,5 +1,5 @@
 import argparse
-from obfuscator.csv_reader import read
+from obfuscator.csv_reader import read_local, read_s3
 
 def main():
     parser = argparse.ArgumentParser(description="gdpr-obfuscator")

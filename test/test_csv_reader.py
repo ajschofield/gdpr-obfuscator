@@ -1,8 +1,12 @@
 # csv_reader.py - tests
 # Author: Alex Schofield
 
-from main import csv_reader
+from obfuscator.csv_reader import CSVReader
 import pytest
+
+reader = CSVReader()
+
+### TODO : TESTS ARE BROKEN, FIX THEM IN NEXT BRANCH ###
 
 def test_empty_csv_should_return_no_content():
     content = ""

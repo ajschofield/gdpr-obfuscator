@@ -1,24 +1,24 @@
 import csv
 from typing import List, Dict
-from logger import get_logger
+from obfuscator.logger import get_logger
 
 logger = get_logger("CSVReader")
 
 class CSVReader:
-    def __init__(self, path: str):
-        self.path = path
+    def __init__(self):
+        pass
 
-    def read_local(self) -> List[Dict[str, str]]:
-        logger.debug(f"Reading local CSV from: {self.path}")
+    def read_local(self, path) -> List[Dict[str, str]]:
+        logger.debug(f"Reading local CSV from: {path}")
         data = []
 
         try:
-            with open(self.path, mode="r", encoding="utf-8") as file:
+            with open(path, mode="r", encoding="utf-8") as file:
                 reader = csv.DictReader(file)
                 for row in reader:
                     data.append(dict(row))
         except FileNotFoundError:
-            logger.error(f"File not found: {self.path}")
+            logger.error(f"File not found: {path}")
         except Exception as e:
             logger.error(f"Error reading file: {e}")
 

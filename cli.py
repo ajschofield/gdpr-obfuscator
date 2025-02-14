@@ -14,8 +14,8 @@ def main():
 
     if args.local and not args.s3:
         logger.debug("User chose to read CSV from local path")
-        reader = CSVReader(args.local)
-        data = reader.read_local()
+        reader = CSVReader()
+        data = reader.read_local(args.local)
         print(data)
     else:
         logger.debug("User chose to read CSV from S3")

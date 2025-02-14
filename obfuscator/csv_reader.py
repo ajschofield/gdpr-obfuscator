@@ -4,6 +4,7 @@ from obfuscator.logger import get_logger
 
 logger = get_logger("CSVReader")
 
+
 class CSVReader:
     def __init__(self):
         pass
@@ -27,6 +28,3 @@ class CSVReader:
 
     def read_s3(self) -> List[Dict[str, str]]:
         return []
-
-
-

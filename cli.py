@@ -4,6 +4,7 @@ from obfuscator.logger import get_logger
 
 logger = get_logger("CLI")
 
+
 def main():
     parser = argparse.ArgumentParser(description="gdpr-obfuscator")
     # Require user to either choose a local file or an S3 object
@@ -19,6 +20,7 @@ def main():
         print(data)
     else:
         logger.debug("User chose to read CSV from S3")
+
 
 if __name__ == "__main__":
     main()

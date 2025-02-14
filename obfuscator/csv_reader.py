@@ -11,7 +11,7 @@ if not logger.handlers:
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-def csv_reader(content: str) -> List[Dict[str, str]]:
+def read(content: str) -> List[Dict[str, str]]:
     f = StringIO(content)
     reader = csv.DictReader(f)
     logger.info("Finished reading CSV!")

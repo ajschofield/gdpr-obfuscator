@@ -1,5 +1,4 @@
 import csv
-from io import StringIO
 from typing import List, Dict
 import logging
 
@@ -11,13 +10,30 @@ if not logger.handlers:
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-def read_local(content: str) -> List[Dict[str, str]]:
-    f = StringIO(content)
-    reader = csv.DictReader(f)
-    logger.info("Finished reading CSV!")
-    return list(reader)
 
-def read_s3():
-    pass
+class CSVReader:
+    def __init__(self, path: str):
+        self.path = path
+
+    def read_local(self) -> List[Dict[str, str]]:
+        logger.debug(f"Reading local CSV from: {self.path}")
+        data = []
+
+        try:
+            with open(self.path, mode="r", encoding="utf-8") as file:
+                reader = csv.DictReader(file)
+                for row in reader:
+                    data.append(dict(row))
+        except FileNotFoundError:
+            logger.error(f"File not found: {self.path}")
+        except Exception as e:
+            logger.error(f"Error reading file: {e}")
+
+        logger.debug(f"Total rows read: {len(data)}")
+        return data
+
+    def read_s3(self) -> List[Dict[str, str]]:
+        return []
+
 
 

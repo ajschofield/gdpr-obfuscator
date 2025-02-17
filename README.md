@@ -2,7 +2,7 @@
 
 1. [Overview](#overview)
 2. [Minimum Viable Product (MVP)](#minimum-viable-product-mvp)
-3. [Additional Features](#additional-features)
+    1. [Additional Features](#additional-features)
 4. [Setup](#setup)
     1. [Prerequisites](#prerequisites)
     2. [Installation](#installation)

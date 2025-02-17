@@ -14,10 +14,10 @@ def get_logger(name: str) -> logging.Logger:
         logger.setLevel(log_level)
 
         handler = logging.StreamHandler()
-        format = logging.Formatter(
+        formatting = logging.Formatter(
             "%(asctime)s - %(levelname)s - %(name)s - %(message)s"
         )
-        handler.setFormatter(format)
+        handler.setFormatter(formatting)
 
         logger.addHandler(handler)
 

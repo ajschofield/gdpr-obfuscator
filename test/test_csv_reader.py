@@ -2,7 +2,6 @@
 # Author: Alex Schofield
 
 from obfuscator.csv_reader import CSVReader
-import pytest
 
 reader = CSVReader()
 

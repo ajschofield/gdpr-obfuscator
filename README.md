@@ -30,4 +30,9 @@ This meets the requirements under the General Data Protection Regulation [(GDPR)
 
 ## Setup
 
+### Prerequisites
+
+- Python >= 3.13
+- Poetry >= 2.0.1
+
 ## Usage

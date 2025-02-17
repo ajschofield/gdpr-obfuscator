@@ -35,4 +35,22 @@ This meets the requirements under the General Data Protection Regulation [(GDPR)
 - Python >= 3.13
 - Poetry >= 2.0.1
 
+### Installation
+
+1. Clone the repository:
+
+```
+git clone --recurse-submodules https://github.com/ajschofield/gdpr-obfuscator.git
+cd gdpr-obfuscator
+```
+
+2. Install dependencies using poetry
+
+```
+# Production
+poetry install
+# Developer (optional)
+poetry install --dev
+```
+
 ## Usage

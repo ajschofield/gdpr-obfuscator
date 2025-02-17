@@ -34,7 +34,5 @@ jobs:
         env:
           DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
         run: |
-          # Install DeepSource CLI
           curl https://deepsource.io/cli | sh
-          # Report coverage results (ensure the path to coverage.xml is correct)
           ./bin/deepsource report --analyzer test-coverage --key python --value-file ./coverage.xml

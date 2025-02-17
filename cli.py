@@ -4,31 +4,43 @@ from obfuscator.csv_reader import CSVReader
 from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger
 
+# Create the logger
 logger = get_logger("CLI")
 
-
 def main():
+    # Create an argument parser
     parser = argparse.ArgumentParser(description="gdpr-obfuscator")
     # Require user to either choose a local file or an S3 object
+    # The user can only choose one of these options or the program will exit
+    # If not provided, the program will exit
     loc = parser.add_mutually_exclusive_group(required=True)
     loc.add_argument("--local")
     loc.add_argument("--s3")
 
+    # Require user to provide a list of PII fields to obfuscate
+    # e.g. --pii name email_address
+    # If not provided, the program will exit
     parser.add_argument("--pii", nargs="+", required=True)
 
+    # Parse the arguments
     args = parser.parse_args()
 
+    # Read the CSV data based on the user's choice of local or S3
     if args.local and not args.s3:
         logger.debug("User chose to read CSV from local path")
+        # Create a CSVReader object and read the local CSV file
         reader = CSVReader()
         data = reader.read_local(args.local)
+        # For debug purposes, log the data read from the CSV
         logger.debug(data)
     else:
         logger.debug("User chose to read CSV from S3")
 
+    # Obfuscate the data based on the user's choice of PII fields
     obfuscated_data = obfuscate(data, args.pii)
+    # For debug purposes, log the obfuscated data as JSON for readability
     logger.debug(json.dumps(obfuscated_data, indent=4))
 
-
+# If the script is run directly (as it should be), call the main function
 if __name__ == "__main__":
     main()

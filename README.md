@@ -7,9 +7,11 @@
 
 ## Overview
 
-A Python library designed to detect and remove Personally Identifiable Information (PII) from CSV files stored in an AWS S3 bucket.
+A Python library designed to detect and remove Personally Identifiable Information (PII) from data formats such as CSV, JSON and Parquet formats.
 
 ## Minimum Viable Product (MVP)
+
+
 
 ## Setup
 

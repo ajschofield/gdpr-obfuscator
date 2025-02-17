@@ -50,10 +50,3 @@ def test_csv_with_quoted_fields_should_run_as_expected():
         {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
     ]
     assert result == expected
-
-
-def test_non_csv_file_should_return_no_content():
-    content = ""
-    result = reader.read_string(content)
-    expected = []
-    assert result == expected

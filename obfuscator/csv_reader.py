@@ -9,8 +9,9 @@ logger = get_logger("CSVReader")
 class CSVReader:
     def __init__(self):
         pass
-
-    def read_local(self, path) -> List[Dict[str, str]]:
+    
+    @staticmethod
+    def read_local(path) -> List[Dict[str, str]]:
         logger.debug(f"Reading local CSV from: {path}")
         data = []
 
@@ -26,10 +27,12 @@ class CSVReader:
 
         logger.debug(f"Total rows read: {len(data)}")
         return data
-
-    def read_s3(self) -> List[Dict[str, str]]:
-        return []
     
+    @staticmethod
+    def read_s3(path) -> List[Dict[str, str]]:
+        return []
+
+    @staticmethod
     def read_string(self, content: str) -> List[Dict[str, str]]:
         if not content.strip():
             return []

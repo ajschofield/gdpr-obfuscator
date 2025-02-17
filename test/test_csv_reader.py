@@ -6,6 +6,7 @@ import pytest
 
 reader = CSVReader()
 
+
 def test_empty_csv_should_return_no_content():
     content = ""
     result = reader.read_string(content)

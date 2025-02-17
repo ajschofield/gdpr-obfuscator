@@ -41,14 +41,14 @@ This meets the requirements under the General Data Protection Regulation [(GDPR)
 
 1. Clone the repository:
 
-```
+```bash
 git clone --recurse-submodules https://github.com/ajschofield/gdpr-obfuscator.git
 cd gdpr-obfuscator
 ```
 
 2. Install dependencies using poetry
 
-```
+```bash
 # Production
 poetry install
 # Developer (optional)

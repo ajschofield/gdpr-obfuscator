@@ -7,9 +7,6 @@ logger = get_logger("CSVReader")
 
 
 class CSVReader:
-    def __init__(self):
-        pass
-    
     @staticmethod
     def read_local(path) -> List[Dict[str, str]]:
         logger.debug(f"Reading local CSV from: {path}")
@@ -33,7 +30,7 @@ class CSVReader:
         return []
 
     @staticmethod
-    def read_string(self, content: str) -> List[Dict[str, str]]:
+    def read_string(content: str) -> List[Dict[str, str]]:
         if not content.strip():
             return []
         

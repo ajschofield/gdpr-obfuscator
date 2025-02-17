@@ -2,8 +2,9 @@
 
 1. [Overview](#overview)
 2. [Minimum Viable Product (MVP)](#minimum-viable-product-mvp)
-3. [Setup](#setup)
-4. [Usage](#usage)
+3. [Additional Features](#additional-features)
+4. [Setup](#setup)
+5. [Usage](#usage)
 
 ## Overview
 
@@ -18,6 +19,14 @@ The MVP covers:
 4. Producing an output CSV file (or a byte-stream) that maintains the original structure but with sensitive fields changed
 
 This meets the requirements under the General Data Protection Regulation [(GDPR)](https://ico.org.uk/media/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr-1-1.pdf) to ensure that all data containing information that can be used to identify an individual should be anonymised.
+
+### Additional Features
+
+*(Ranked in order of priority from high to low)*
+
+- [ ] **Support for JSON and Parquet formats**: Extend the library to support reading and writing data in JSON and Parquet formats
+- [ ] **Command-line interface**: Create a command-line interface to allow users to run the obfuscation process from the terminal
+- [ ] **Support for multiple sources**: Extend the library to support reading data from multiple sources (e.g. local file system)
 
 ## Setup
 

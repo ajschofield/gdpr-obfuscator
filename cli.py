@@ -7,6 +7,7 @@ from obfuscator.logger import get_logger
 # Create the logger
 logger = get_logger("CLI")
 
+
 def main():
     # Create an argument parser
     parser = argparse.ArgumentParser(description="gdpr-obfuscator")
@@ -40,6 +41,7 @@ def main():
     obfuscated_data = obfuscate(data, args.pii)
     # For debug purposes, log the obfuscated data as JSON for readability
     logger.debug(json.dumps(obfuscated_data, indent=4))
+
 
 # If the script is run directly (as it should be), call the main function
 if __name__ == "__main__":

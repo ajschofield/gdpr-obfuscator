@@ -9,13 +9,16 @@ logger = get_logger("CSVReader")
 # Putting the CSV reading components into a class may seem like overkill
 # for a simple script, but it allows for better organization and scalability.
 # @staticmethod is used to define the method without an instance of the class
-# being required. The methods could be defined just as functions, and this 
+# being required. The methods could be defined just as functions, and this
 # may still be changed.
+
+
 class CSVReader:
     """
     A class to read CSV data from a local file, S3 object, or string. Near
     the project completion, support for JSON/Parquet files will be added.
     """
+
     @staticmethod
     def read_local(path) -> List[Dict[str, str]]:
         """
@@ -24,7 +27,7 @@ class CSVReader:
         """
         # Log the path of the file being read for debugging
         logger.debug(f"Reading local CSV from: {path}")
-        
+
         # Attempt to read the file and return the data as a list of dictionaries
         # However, if the file isn't found or there is a generic exception, log
         # the error and raise an exception
@@ -34,7 +37,7 @@ class CSVReader:
                 return [dict(row) for row in reader]
         except FileNotFoundError:
             logger.error(f"File not found: {path}")
-            raise 
+            raise
         except Exception as e:
             logger.error(f"Error reading file: {e}")
 

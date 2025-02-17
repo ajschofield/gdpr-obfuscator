@@ -14,14 +14,14 @@ def main():
     loc.add_argument("--s3")
 
     parser.add_argument("--pii", nargs="+", required=True)
-    
+
     args = parser.parse_args()
 
     if args.local and not args.s3:
         logger.debug("User chose to read CSV from local path")
         reader = CSVReader()
         data = reader.read_local(args.local)
-        print(data)
+        logger.debug(data)
     else:
         logger.debug("User chose to read CSV from S3")
 

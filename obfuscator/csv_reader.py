@@ -1,4 +1,5 @@
 import csv
+import io
 from typing import List, Dict
 from obfuscator.logger import get_logger
 
@@ -28,3 +29,11 @@ class CSVReader:
 
     def read_s3(self) -> List[Dict[str, str]]:
         return []
+    
+    def read_string(self, content: str) -> List[Dict[str, str]]:
+        if not content.strip():
+            return []
+        
+        f = io.StringIO(content)
+        reader = csv.DictReader(f)
+        return [dict(row) for row in reader]

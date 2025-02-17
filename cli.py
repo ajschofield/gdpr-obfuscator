@@ -1,4 +1,5 @@
 import argparse
+import json
 from obfuscator.csv_reader import CSVReader
 from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger
@@ -24,6 +25,9 @@ def main():
         logger.debug(data)
     else:
         logger.debug("User chose to read CSV from S3")
+
+    obfuscated_data = obfuscate(data, args.pii)
+    logger.debug(json.dumps(obfuscated_data, indent=4))
 
 
 if __name__ == "__main__":

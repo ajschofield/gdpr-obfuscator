@@ -1,7 +1,9 @@
-- [gdpr-obfuscator](#gdpr-obfuscator)
-  * [Minimum Viable Product (MVP)](#minimum-viable-product--mvp-)
-  * [Setup](#setup)
-  * [Usage](#usage)
+# GDPR Obfuscator - Launchpad Project
+
+1. [Overview](#overview)
+2. [Minimum Viable Product (MVP)](#minimum-viable-product-mvp)
+3. [Setup](#setup)
+4. [Usage](#usage)
 
 ## Overview
 

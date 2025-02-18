@@ -2,6 +2,7 @@ import csv
 import io
 from typing import List, Dict
 from obfuscator.logger import get_logger
+from obfuscator.utils import get_s3_path
 
 # Create the logger
 logger = get_logger("CSVReader")
@@ -48,7 +49,8 @@ class CSVReader:
         and return the data as a list of dictionaries.
         """
         # Yet to be implemented.
-        return []
+        bucket, key = get_s3_path(path)
+        logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
 
     @staticmethod
     def read_string(content: str) -> List[Dict[str, str]]:

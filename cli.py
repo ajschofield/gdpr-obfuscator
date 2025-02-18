@@ -26,11 +26,12 @@ def main():
     # Parse the arguments
     args = parser.parse_args()
 
+    # Create the CSVReader object
+    reader = CSVReader()
+
     # Read the CSV data based on the user's choice of local or S3
     if args.local and not args.s3:
         logger.debug("User chose to read CSV from local path")
-        # Create a CSVReader object and read the local CSV file
-        reader = CSVReader()
         data = reader.read_local(args.local)
         # For debug purposes, log the data read from the CSV
         logger.debug(data)

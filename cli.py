@@ -34,16 +34,16 @@ def main():
         logger.debug("User chose to read CSV from local path")
         data = reader.read_local(args.local)
         # For debug purposes, log the data read from the CSV
-        logger.debug(data)
+        logger.debug("Contents: " + str(data))
     else:
         logger.debug("User chose to read CSV from S3")
         data = reader.read_s3(args.s3)
-        logger.debug(data)
+        logger.debug("Contents: " + str(data))
 
     # Obfuscate the data based on the user's choice of PII fields
     obfuscated_data = obfuscate(data, args.pii)
     # For debug purposes, log the obfuscated data as JSON for readability
-    logger.debug(json.dumps(obfuscated_data, indent=4))
+    logger.debug("Obfuscated data (JSON): " + json.dumps(obfuscated_data, indent=4))
 
 
 # If the script is run directly (as it should be), call the main function

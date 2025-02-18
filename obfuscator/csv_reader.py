@@ -53,8 +53,8 @@ class CSVReader:
         bucket, key = get_s3_path(path)
         logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
 
-        # If DEBUG=TRUE, use the localstack endpoint for testing
-        if os.getenv("DEBUG", "FALSE").upper() == "TRUE":
+        # If LOCALSTACK=TRUE, use the localstack endpoint for testing
+        if os.getenv("LOCALSTACK", "FALSE").upper() == "TRUE":
             localstack_endpoint = "http://localhost.localstack.cloud:4566"
             logger.debug("Using LocalStack endpoint for S3")
             client = boto3.client(

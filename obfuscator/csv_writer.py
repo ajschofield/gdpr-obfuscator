@@ -7,7 +7,7 @@ from obfuscator.logger import get_logger
 logger = get_logger("CSVWriter")
 
 
-def data_to_csv_bytes(data: List[Dict[str, str]]) -> bytes:
+def create_byte_stream(data: List[Dict[str, str]]) -> bytes:
     if not data:
         logger.info("No valid data was provided to write")
         return b""

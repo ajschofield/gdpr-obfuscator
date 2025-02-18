@@ -37,6 +37,8 @@ def main():
         logger.debug(data)
     else:
         logger.debug("User chose to read CSV from S3")
+        data = reader.read_s3(args.s3)
+        logger.debug(data)
 
     # Obfuscate the data based on the user's choice of PII fields
     obfuscated_data = obfuscate(data, args.pii)

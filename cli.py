@@ -26,21 +26,24 @@ def main():
     # Parse the arguments
     args = parser.parse_args()
 
+    # Create the CSVReader object
+    reader = CSVReader()
+
     # Read the CSV data based on the user's choice of local or S3
     if args.local and not args.s3:
         logger.debug("User chose to read CSV from local path")
-        # Create a CSVReader object and read the local CSV file
-        reader = CSVReader()
         data = reader.read_local(args.local)
         # For debug purposes, log the data read from the CSV
-        logger.debug(data)
+        logger.debug("Contents: " + str(data))
     else:
         logger.debug("User chose to read CSV from S3")
+        data = reader.read_s3(args.s3)
+        logger.debug("Contents: " + str(data))
 
     # Obfuscate the data based on the user's choice of PII fields
     obfuscated_data = obfuscate(data, args.pii)
     # For debug purposes, log the obfuscated data as JSON for readability
-    logger.debug(json.dumps(obfuscated_data, indent=4))
+    logger.debug("Obfuscated data (JSON): " + json.dumps(obfuscated_data, indent=4))
 
 
 # If the script is run directly (as it should be), call the main function

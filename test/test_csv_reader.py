@@ -5,6 +5,8 @@ from obfuscator.csv_reader import CSVReader
 
 reader = CSVReader()
 
+# CSVREADER: READ_STRING TESTS
+
 # Check if the function can read a CSV string with no content and return
 # an empty list
 
@@ -61,3 +63,5 @@ def test_csv_with_quoted_fields_should_run_as_expected():
         {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
     ]
     assert result == expected
+
+# CSVREADER: READ_S3 TESTS

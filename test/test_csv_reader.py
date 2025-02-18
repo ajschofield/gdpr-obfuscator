@@ -1,6 +1,8 @@
 # csv_reader.py - tests
 # Author: Alex Schofield
 
+import boto3
+from moto import mock_s3
 from obfuscator.csv_reader import CSVReader
 
 reader = CSVReader()

@@ -1,5 +1,6 @@
 import csv
 import io
+import boto3
 from typing import List, Dict
 from obfuscator.logger import get_logger
 from obfuscator.utils import get_s3_path
@@ -48,9 +49,24 @@ class CSVReader:
         A method to read an S3 object containing CSV data
         and return the data as a list of dictionaries.
         """
-        # Yet to be implemented.
         bucket, key = get_s3_path(path)
         logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
+
+        client = boto3.client("s3")
+
+        try:
+            # Attempt to read the S3 object and return the data as a list of dictionaries
+            response = client.get_object(Bucket=bucket, Key=key)
+            logger.info("S3 object read successfully")
+            # Read and decode the content
+            content = response["Body"].read().decode("utf-8")
+            # Even though the read_string method was only created for testing,
+            # it can be reused here to read and return the CSV data
+            return CSVReader.read_string(content)
+        # TODO: Add more specific exceptions to catch
+        except Exception as e:
+            logger.error(f"Error reading S3 object: {e}")
+            raise
 
     @staticmethod
     def read_string(content: str) -> List[Dict[str, str]]:

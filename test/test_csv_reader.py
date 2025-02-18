@@ -1,4 +1,4 @@
-# csv_reader.py - tests
+# csv_reader.py - tests for read_string and read_s3
 # Author: Alex Schofield
 
 import boto3

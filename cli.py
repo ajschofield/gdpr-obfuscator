@@ -3,6 +3,7 @@ import json
 from obfuscator.csv_reader import CSVReader
 from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger
+from obfuscator.csv_writer import create_byte_stream
 
 # Create the logger
 logger = get_logger("CLI")
@@ -44,6 +45,7 @@ def main():
     obfuscated_data = obfuscate(data, args.pii)
     # For debug purposes, log the obfuscated data as JSON for readability
     logger.debug("Obfuscated data (JSON): " + json.dumps(obfuscated_data, indent=4))
+    return create_byte_stream(obfuscated_data)
 
 
 # If the script is run directly (as it should be), call the main function

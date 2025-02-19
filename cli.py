@@ -24,10 +24,8 @@ def main():
     # The user can only choose one of these options or the program will exit
     # If not provided, the program will exit
     loc = parser.add_mutually_exclusive_group(required=True)
-    loc.add_argument("-l", "--local", help="Path to local CSV file")
-    loc.add_argument(
-        "-s", "--s3", help="S3 object path (example: s3://bucket-name/file)"
-    )
+    loc.add_argument("-l", "--local", help="Local path to file")
+    loc.add_argument("-s", "--s3", help="URI path to file stored in S3")
 
     # Require user to provide a list of PII fields to obfuscate
     # e.g. --pii name email_address

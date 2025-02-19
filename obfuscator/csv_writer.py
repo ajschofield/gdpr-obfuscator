@@ -9,6 +9,7 @@ logger = get_logger("CSVWRITER")
 def create_byte_stream(data: List[Dict[str, str]]) -> bytes:
     if not data:
         logger.error("Invalid or empty data was provided to write")
+        raise
 
     output = io.StringIO()
 

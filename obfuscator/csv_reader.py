@@ -4,10 +4,7 @@ import boto3
 import os
 from typing import List, Dict
 from obfuscator.logger import get_logger
-from obfuscator.utils import get_s3_path
-
-# Create the logger
-logger = get_logger("CSVREADER")
+from obfuscator.utils import Utilities
 
 # Putting the CSV reading components into a class may seem like overkill
 # for a simple script, but it allows for better organization and scalability.
@@ -22,14 +19,18 @@ class CSVReader:
     the project completion, support for JSON/Parquet files will be added.
     """
 
-    @staticmethod
-    def read_local(path) -> List[Dict[str, str]]:
+    def __init__(self, log_level=None):
+        self.log_level = log_level
+        # Create the logger
+        self.logger = get_logger("CSVREADER", log_level)
+
+    def read_local(self, path) -> List[Dict[str, str]]:
         """
         A method to read a local CSV file and return the data as a list of
         dictionaries.
         """
         # Log the path of the file being read for debugging
-        logger.debug(f"Reading local CSV from: {path}")
+        self.logger.debug(f"Reading local CSV from: {path}")
 
         # Attempt to read the file and return the data as a list of dictionaries
         # However, if the file isn't found or there is a generic exception, log
@@ -39,38 +40,38 @@ class CSVReader:
                 reader = csv.DictReader(f)
                 return [dict(row) for row in reader]
         except FileNotFoundError:
-            logger.error(f"File not found: {path}")
+            self.logger.error(f"File not found: {path}")
             raise
         except Exception as e:
-            logger.error(f"Error reading file: {e}")
+            self.logger.error(f"Error reading file: {e}")
 
-    @staticmethod
-    def read_s3(path) -> List[Dict[str, str]]:
+    def read_s3(self, path) -> List[Dict[str, str]]:
         """
         A method to read an S3 object containing CSV data
         and return the data as a list of dictionaries.
         """
-        bucket, key = get_s3_path(path)
-        logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
+        utils = Utilities(self.log_level)
+        bucket, key = utils.get_s3_path(path)
+        self.logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
 
         # If LOCALSTACK=TRUE, use the localstack endpoint for testing
         if os.getenv("LOCALSTACK", "FALSE").upper() == "TRUE":
             localstack_endpoint = "http://localhost.localstack.cloud:4566"
-            logger.debug("Using LocalStack endpoint for S3")
+            self.logger.debug("Using LocalStack endpoint for S3")
             client = boto3.client(
                 "s3",
                 endpoint_url=localstack_endpoint,
                 aws_access_key_id="dummy",
                 aws_secret_access_key="dummy",
             )
-            logger.debug(f"endpoint_url: {localstack_endpoint}")
+            self.logger.debug(f"endpoint_url: {localstack_endpoint}")
         else:
             client = boto3.client("s3")
 
         try:
             # Attempt to read the S3 object and return the data as a list of dictionaries
             response = client.get_object(Bucket=bucket, Key=key)
-            logger.info("S3 object read successfully")
+            self.logger.info("S3 object read successfully")
             # Read and decode the content
             content = response["Body"].read().decode("utf-8")
             # Even though the read_string method was only created for testing,
@@ -78,11 +79,10 @@ class CSVReader:
             return CSVReader.read_string(content)
         # TODO: Add more specific exceptions to catch
         except Exception as e:
-            logger.error(f"Error reading S3 object: {e}")
+            self.logger.error(f"Error reading S3 object: {e}")
             raise
 
-    @staticmethod
-    def read_string(content: str) -> List[Dict[str, str]]:
+    def read_string(self, content: str) -> List[Dict[str, str]]:
         """
         A method to read CSV data from a string and return the data as a list
         of dictionaries.

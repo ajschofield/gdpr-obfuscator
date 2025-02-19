@@ -1,15 +1,18 @@
 # Utility functions
 from obfuscator.logger import get_logger
 
-# Create the logger
-logger = get_logger("UTILS")
 
+class Utilities:
 
-def get_s3_path(uri):
-    parts = uri.replace("s3://", "").split("/")
-    logger.debug(f"Parts: {parts}")
-    bucket = parts.pop(0)
-    logger.debug(f"Bucket: {bucket}")
-    key = "/".join(parts)
-    logger.debug(f"Key: {key}")
-    return bucket, key
+    def __init__(self, logger=None):
+        # Create the logger
+        self.logger = get_logger("UTILITIES", logger)
+
+    def get_s3_path(self, uri):
+        parts = uri.replace("s3://", "").split("/")
+        self.logger.debug(f"Parts: {parts}")
+        bucket = parts.pop(0)
+        self.logger.debug(f"Bucket: {bucket}")
+        key = "/".join(parts)
+        self.logger.debug(f"Key: {key}")
+        return bucket, key

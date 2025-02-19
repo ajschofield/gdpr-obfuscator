@@ -5,9 +5,6 @@ from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger
 from obfuscator.csv_writer import create_byte_stream
 
-# Create the logger
-logger = get_logger("CLI")
-
 
 def main():
     # Create an argument parser
@@ -42,11 +39,13 @@ def main():
     args = parser.parse_args()
 
     # If the user chose verbose logging, set the logger to debug
-    if args.verbose:
-        logger.setLevel("DEBUG")
+    log_level = "DEBUG" if args.verbose else "INFO"
+
+    # Create the logger
+    logger = get_logger("CLI", log_level)
 
     # Create the CSVReader object
-    reader = CSVReader()
+    reader = CSVReader(log_level)
 
     # Read the CSV data based on the user's choice of local or S3
     if args.local and not args.s3:
@@ -56,6 +55,7 @@ def main():
         logger.debug("Contents: " + str(data))
     else:
         logger.debug("User chose to read CSV from S3")
+
         data = reader.read_s3(args.s3)
         logger.debug("Contents: " + str(data))
 

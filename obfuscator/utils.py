@@ -3,7 +3,6 @@ from obfuscator.logger import get_logger
 
 
 class Utilities:
-
     def __init__(self, logger=None):
         self.logger = get_logger("UTILITIES", logger)
 

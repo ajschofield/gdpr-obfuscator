@@ -12,7 +12,6 @@ class LogLevel(Enum):
 
 
 def get_logger(name: str, level: LogLevel = LogLevel.INFO) -> logging.Logger:
-
     if isinstance(level, str):
         try:
             level = LogLevel[level.upper()]

@@ -1,9 +1,9 @@
 import boto3
 from moto import mock_aws
-from obfuscator.read import CSVReader
+from obfuscator.read import DataReader
 import pytest
 
-reader = CSVReader(log_level="DEBUG")
+reader = DataReader(log_level="DEBUG")
 
 
 def test_empty_csv_should_return_no_content():

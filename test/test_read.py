@@ -1,17 +1,9 @@
-# csv_reader.py - tests for read_string and read_s3
-# Author: Alex Schofield
-
 import boto3
 from moto import mock_aws
-from obfuscator.csv_reader import CSVReader
+from obfuscator.read import DataReader
 import pytest
 
-reader = CSVReader()
-
-# CSVREADER: READ_STRING TESTS
-
-# Check if the function can read a CSV string with no content and return
-# an empty list
+reader = DataReader(log_level="DEBUG")
 
 
 def test_empty_csv_should_return_no_content():
@@ -21,19 +13,11 @@ def test_empty_csv_should_return_no_content():
     assert result == expected
 
 
-# Check if the function can read a CSV string with only a header and return
-# an empty list
-
-
 def test_csv_with_header_only_should_return_no_content():
     content = "student_id,name,course\n"
     result = reader.read_string(content)
     expected = []
     assert result == expected
-
-
-# Check if the function can read a CSV string with valid data and return
-# a list of dictionaries
 
 
 def test_csv_with_valid_data():
@@ -50,10 +34,6 @@ def test_csv_with_valid_data():
     assert result == expected
 
 
-# Check if the function can read a CSV string with quoted fields and return
-# a list of dictionaries with the quoted fields intact
-
-
 def test_csv_with_quoted_fields_should_run_as_expected():
     content = (
         "student_id,name,course\n"
@@ -66,9 +46,6 @@ def test_csv_with_quoted_fields_should_run_as_expected():
         {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
     ]
     assert result == expected
-
-
-# CSVREADER: READ_S3 TESTS
 
 
 def setup_s3(s3_client, bucket: str, key: str, content: str):
@@ -119,7 +96,7 @@ def test_read_s3_empty_csv_returns_empty_list():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         assert data == []
 
 
@@ -129,7 +106,7 @@ def test_read_s3_nonexistent_bucket_raises_exception():
         key = "data/mock.csv"
         path = f"s3://{bucket}/{key}"
         with pytest.raises(Exception):
-            CSVReader.read_s3(path)
+            reader.read_s3(path)
 
 
 def test_read_s3_nonexistent_key_raises_exception():
@@ -143,7 +120,7 @@ def test_read_s3_nonexistent_key_raises_exception():
         key = "data/nonexistent.csv"
         path = f"s3://{bucket}/{key}"
         with pytest.raises(Exception):
-            CSVReader.read_s3(path)
+            reader.read_s3(path)
 
 
 def test_read_s3_malformed_csv_returns_expected():
@@ -155,7 +132,7 @@ def test_read_s3_malformed_csv_returns_expected():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         expected = [{"1234": "5678", "Student 1": "Student 2", "Course 1": "Course 2"}]
         assert data == expected
 
@@ -175,7 +152,7 @@ def test_read_s3_csv_with_extra_empty_lines():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         expected = [
             {"student_id": "1234", "name": "Student 1", "course": "Course 1"},
             {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
@@ -196,7 +173,7 @@ def test_read_s3_csv_with_whitespace_in_fields():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         expected = [
             {"student_id": " 1234 ", " name ": " Student 1 ", " course ": " Course 1 "},
             {"student_id": "5678", " name ": "Student 2", " course ": "Course 2"},

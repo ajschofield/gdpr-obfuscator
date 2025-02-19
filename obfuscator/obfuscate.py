@@ -2,7 +2,7 @@ from typing import List, Dict
 from obfuscator.logger import get_logger
 
 # Create the logger
-logger = get_logger("Obfuscator")
+logger = get_logger("OBFUSCATE")
 
 
 def obfuscate(

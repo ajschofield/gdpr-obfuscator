@@ -7,7 +7,7 @@ from obfuscator.logger import get_logger
 from obfuscator.utils import get_s3_path
 
 # Create the logger
-logger = get_logger("CSVReader")
+logger = get_logger("CSVREADER")
 
 # Putting the CSV reading components into a class may seem like overkill
 # for a simple script, but it allows for better organization and scalability.

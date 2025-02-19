@@ -4,7 +4,7 @@ from typing import List, Dict
 from obfuscator.logger import get_logger
 
 # Create the logger
-logger = get_logger("CSVWriter")
+logger = get_logger("CSVWRITER")
 
 
 def create_byte_stream(data: List[Dict[str, str]]) -> bytes:

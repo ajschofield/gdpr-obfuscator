@@ -2,7 +2,7 @@
 from obfuscator.logger import get_logger
 
 # Create the logger
-logger = get_logger("CLI")
+logger = get_logger("UTILS")
 
 
 def get_s3_path(uri):

@@ -1,5 +1,4 @@
 import argparse
-import json
 from obfuscator.csv_reader import CSVReader
 from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger

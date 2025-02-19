@@ -1,8 +1,8 @@
 import argparse
 from obfuscator.read import DataReader
+from obfuscator.write import DataWriter
 from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger
-from obfuscator.csv_writer import create_byte_stream
 
 
 def main():
@@ -43,7 +43,9 @@ def main():
 
     obfuscated_data = obfuscate(data, args.pii)
 
-    return create_byte_stream(obfuscated_data)
+    writer = DataWriter()
+
+    return writer.create_byte_stream(obfuscated_data)
 
 
 if __name__ == "__main__":

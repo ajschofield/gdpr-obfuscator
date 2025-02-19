@@ -6,18 +6,22 @@ from obfuscator.logger import get_logger
 logger = get_logger("CSVWRITER")
 
 
-def create_byte_stream(data: List[Dict[str, str]]) -> bytes:
-    if not data:
-        logger.error("Invalid or empty data was provided to write")
+class DataWriter:
+    def __init__(self):
+        pass
 
-    output = io.StringIO()
+    def create_byte_stream(self, data: List[Dict[str, str]]) -> bytes:
+        if not data:
+            logger.error("Invalid or empty data was provided to write")
 
-    headers = list(data[0].keys())
+        output = io.StringIO()
 
-    writer = csv.DictWriter(output, fieldnames=headers)
-    writer.writeheader()
-    writer.writerows(data)
+        headers = list(data[0].keys())
 
-    csv_string = output.getvalue()
+        writer = csv.DictWriter(output, fieldnames=headers)
+        writer.writeheader()
+        writer.writerows(data)
 
-    return csv_string.encode("utf-8")
+        csv_string = output.getvalue()
+
+        return csv_string.encode("utf-8")

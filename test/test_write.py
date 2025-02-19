@@ -1,6 +1,6 @@
 import io
 import csv
-from obfuscator.csv_writer import create_byte_stream
+from obfuscator.write import create_byte_stream
 
 
 def csv_bytes_to_list(csv_bytes: bytes):

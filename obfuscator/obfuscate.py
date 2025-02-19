@@ -12,10 +12,12 @@ def obfuscate(
     sensitive values with a string of asterisks.
     """
     if not data:
-        logger.error("Invalid or empty was provided to obfuscate")
+        logger.error(
+            "Invalid or empty data was provided to obfuscate. Returning empty list."
+        )
         return []
     if not pii_fields:
-        logger.error("No PII fields provided to obfuscate")
+        logger.error("No PII fields provided to obfuscate. Returning empty list.")
         return []
 
     return [

@@ -22,17 +22,6 @@ The MVP covers:
 
 This meets the requirements under the General Data Protection Regulation [(GDPR)](https://ico.org.uk/media/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr-1-1.pdf) to ensure that all data containing information that can be used to identify an individual should be anonymised.
 
-### To-Do
-
-*(Ranked in order of priority from high to low)*
-
-- [ ] **S3 Integration**: Extend the library to support reading and writing data from an S3 bucket
-- [ ] **Support for JSON formats**: Extend the library to support reading and writing data in JSON
-- [ ] **Support for Parquet formats**: Extend the library to support reading and writing data in Parquet
-- [ ] **Command-line interface**: Create a command-line interface to allow users to run the obfuscation process from the terminal
-- [ ] **Support for multiple sources**: Extend the library to support reading data from multiple sources (e.g. local file system)
-- [ ] **Support for additional obfuscation methods**: Preserve original data but in a different way (e.g. hashing)
-
 ## Setup
 
 ### Prerequisites

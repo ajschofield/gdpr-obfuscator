@@ -13,6 +13,7 @@ class DataWriter:
     def create_byte_stream(self, data: List[Dict[str, str]]) -> bytes:
         if not data:
             logger.error("Invalid or empty data was provided to write")
+            return b""
 
         output = io.StringIO()
 

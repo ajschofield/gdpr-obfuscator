@@ -19,13 +19,13 @@ def main():
     # The user can only choose one of these options or the program will exit
     # If not provided, the program will exit
     loc = parser.add_mutually_exclusive_group(required=True)
-    loc.add_argument("--local")
-    loc.add_argument("--s3")
+    loc.add_argument("-l", "--local")
+    loc.add_argument("-s", "--s3")
 
     # Require user to provide a list of PII fields to obfuscate
     # e.g. --pii name email_address
     # If not provided, the program will exit
-    parser.add_argument("--pii", nargs="+", required=True)
+    parser.add_argument("-p", "--pii", nargs="+", required=True)
 
     # Parse the arguments
     args = parser.parse_args()

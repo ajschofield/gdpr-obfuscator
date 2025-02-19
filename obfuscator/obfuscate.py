@@ -13,10 +13,10 @@ def obfuscate(
     """
     if not data:
         logger.error("Invalid or empty was provided to obfuscate")
-        raise
+        raise ValueError("Invalid data provided to obfuscate")
     if not pii_fields:
         logger.error("No PII fields provided to obfuscate")
-        raise
+        raise ValueError("No PII fields provided to obfuscate")
 
     return [
         {k: ("***" if k in pii_fields else v) for k, v in record.items()}

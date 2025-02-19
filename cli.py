@@ -41,6 +41,10 @@ def main():
     # Parse the arguments
     args = parser.parse_args()
 
+    # If the user chose verbose logging, set the logger to debug
+    if args.verbose:
+        logger.setLevel("DEBUG")
+
     # Create the CSVReader object
     reader = CSVReader()
 

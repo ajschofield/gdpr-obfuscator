@@ -3,7 +3,7 @@ from moto import mock_aws
 from obfuscator.csv_reader import CSVReader
 import pytest
 
-reader = CSVReader()
+reader = CSVReader(log_level="DEBUG")
 
 
 def test_empty_csv_should_return_no_content():
@@ -96,7 +96,7 @@ def test_read_s3_empty_csv_returns_empty_list():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         assert data == []
 
 
@@ -106,7 +106,7 @@ def test_read_s3_nonexistent_bucket_raises_exception():
         key = "data/mock.csv"
         path = f"s3://{bucket}/{key}"
         with pytest.raises(Exception):
-            CSVReader.read_s3(path)
+            reader.read_s3(path)
 
 
 def test_read_s3_nonexistent_key_raises_exception():
@@ -120,7 +120,7 @@ def test_read_s3_nonexistent_key_raises_exception():
         key = "data/nonexistent.csv"
         path = f"s3://{bucket}/{key}"
         with pytest.raises(Exception):
-            CSVReader.read_s3(path)
+            reader.read_s3(path)
 
 
 def test_read_s3_malformed_csv_returns_expected():
@@ -132,7 +132,7 @@ def test_read_s3_malformed_csv_returns_expected():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         expected = [{"1234": "5678", "Student 1": "Student 2", "Course 1": "Course 2"}]
         assert data == expected
 
@@ -152,7 +152,7 @@ def test_read_s3_csv_with_extra_empty_lines():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         expected = [
             {"student_id": "1234", "name": "Student 1", "course": "Course 1"},
             {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
@@ -173,7 +173,7 @@ def test_read_s3_csv_with_whitespace_in_fields():
         setup_s3(s3, bucket, key, csv_content)
         path = f"s3://{bucket}/{key}"
 
-        data = CSVReader.read_s3(path)
+        data = reader.read_s3(path)
         expected = [
             {"student_id": " 1234 ", " name ": " Student 1 ", " course ": " Course 1 "},
             {"student_id": "5678", " name ": "Student 2", " course ": "Course 2"},

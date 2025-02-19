@@ -12,7 +12,7 @@ def obfuscate(
     sensitive values with a string of asterisks.
     """
     if not data:
-        logger.info("No valid data was provided to obfuscate")
+        logger.error("Invalid or empty was provided to obfuscate")
         return []
 
     return [

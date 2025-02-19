@@ -8,8 +8,7 @@ logger = get_logger("CSVWRITER")
 
 def create_byte_stream(data: List[Dict[str, str]]) -> bytes:
     if not data:
-        logger.info("No valid data was provided to write")
-        return b""
+        logger.error("Invalid or empty data was provided to write")
 
     output = io.StringIO()
 
@@ -20,6 +19,5 @@ def create_byte_stream(data: List[Dict[str, str]]) -> bytes:
     writer.writerows(data)
 
     csv_string = output.getvalue()
-    logger.debug(f"CSV data: {csv_string}")
 
     return csv_string.encode("utf-8")

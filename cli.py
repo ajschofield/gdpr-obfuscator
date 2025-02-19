@@ -31,23 +31,19 @@ def main():
     args = parser.parse_args()
 
     log_level = "DEBUG" if args.verbose else "INFO"
-
     logger = get_logger("CLI", log_level)
 
     reader = CSVReader(log_level)
 
     if args.local and not args.s3:
-        logger.debug("User chose to read CSV from local path")
+        logger.debug("Read data from local path")
         data = reader.read_local(args.local)
-        logger.debug("Contents: " + str(data))
     else:
-        logger.debug("User chose to read CSV from S3")
-
+        logger.debug("Read data from S3")
         data = reader.read_s3(args.s3)
-        logger.debug("Contents: " + str(data))
 
     obfuscated_data = obfuscate(data, args.pii)
-    logger.debug("Obfuscated data (JSON): " + json.dumps(obfuscated_data, indent=4))
+
     return create_byte_stream(obfuscated_data)
 
 

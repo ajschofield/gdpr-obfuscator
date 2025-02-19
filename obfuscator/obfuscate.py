@@ -17,8 +17,8 @@ def obfuscate(
         )
         return []
     if not pii_fields:
-        logger.error("No PII fields provided to obfuscate. Returning empty list.")
-        return []
+        logger.error("No PII fields provided to obfuscate. Returning data unchanged.")
+        return data
 
     return [
         {k: ("***" if k in pii_fields else v) for k, v in record.items()}

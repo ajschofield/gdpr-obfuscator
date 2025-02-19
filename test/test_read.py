@@ -1,6 +1,6 @@
 import boto3
 from moto import mock_aws
-from obfuscator.csv_reader import CSVReader
+from obfuscator.read import CSVReader
 import pytest
 
 reader = CSVReader(log_level="DEBUG")

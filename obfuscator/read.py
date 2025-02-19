@@ -7,7 +7,7 @@ from obfuscator.logger import get_logger
 from obfuscator.utils import Utilities
 
 
-class CSVReader:
+class DataReader:
     """
     A class to read CSV data from a local file, S3 object, or string. Near
     the project completion, support for JSON/Parquet files will be added.

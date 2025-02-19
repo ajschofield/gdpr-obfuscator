@@ -1,5 +1,5 @@
 import argparse
-from obfuscator.csv_reader import CSVReader
+from obfuscator.read import DataReader
 from obfuscator.obfuscate import obfuscate
 from obfuscator.logger import get_logger
 from obfuscator.csv_writer import create_byte_stream
@@ -32,7 +32,7 @@ def main():
     log_level = "DEBUG" if args.verbose else "INFO"
     logger = get_logger("CLI", log_level)
 
-    reader = CSVReader(log_level)
+    reader = DataReader(log_level)
 
     if args.local and not args.s3:
         logger.debug("Read data from local path")

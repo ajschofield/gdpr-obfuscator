@@ -1,8 +1,8 @@
-from read import DataReader
-from write import DataWriter
-from utils import Utilities
-from obfuscate import obfuscate
-from types import List
+from obfuscator.read import DataReader
+from obfuscator.write import DataWriter
+from obfuscator.utils import Utilities
+from obfuscator.obfuscate import obfuscate
+from typing import List
 
 
 def main(s3_source: str, pii_fields: List[str], log_level: str = "INFO") -> bytes:

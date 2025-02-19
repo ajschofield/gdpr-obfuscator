@@ -63,6 +63,15 @@ class CSVReader:
             self.logger.info("S3 object read successfully")
             content = response["Body"].read().decode("utf-8")
             return CSVReader.read_string(content)
+        except client.exceptions.NoSuchKey:
+            self.logger.error(f"Object not found: {bucket}/{key}")
+            raise
+        except client.exceptions.ClientError as e:
+            self.logger.error(f"Error reading S3 object: {e}")
+            raise
+        except UnicodeDecodeError as e:
+            self.logger.error(f"Error decoding S3 object: {e}")
+            raise
         except Exception as e:
             self.logger.error(f"Error reading S3 object: {e}")
             raise

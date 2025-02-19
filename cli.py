@@ -11,7 +11,10 @@ logger = get_logger("CLI")
 
 def main():
     # Create an argument parser
-    parser = argparse.ArgumentParser(description="gdpr-obfuscator")
+    parser = argparse.ArgumentParser(
+        prog="GDPR-Obfuscator",
+        description="Obfuscate sensitive data stored locally or in an AWS environment",
+    )
     # Require user to either choose a local file or an S3 object
     # The user can only choose one of these options or the program will exit
     # If not provided, the program will exit

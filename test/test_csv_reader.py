@@ -1,17 +1,9 @@
-# csv_reader.py - tests for read_string and read_s3
-# Author: Alex Schofield
-
 import boto3
 from moto import mock_aws
 from obfuscator.csv_reader import CSVReader
 import pytest
 
 reader = CSVReader()
-
-# CSVREADER: READ_STRING TESTS
-
-# Check if the function can read a CSV string with no content and return
-# an empty list
 
 
 def test_empty_csv_should_return_no_content():
@@ -21,19 +13,11 @@ def test_empty_csv_should_return_no_content():
     assert result == expected
 
 
-# Check if the function can read a CSV string with only a header and return
-# an empty list
-
-
 def test_csv_with_header_only_should_return_no_content():
     content = "student_id,name,course\n"
     result = reader.read_string(content)
     expected = []
     assert result == expected
-
-
-# Check if the function can read a CSV string with valid data and return
-# a list of dictionaries
 
 
 def test_csv_with_valid_data():
@@ -50,10 +34,6 @@ def test_csv_with_valid_data():
     assert result == expected
 
 
-# Check if the function can read a CSV string with quoted fields and return
-# a list of dictionaries with the quoted fields intact
-
-
 def test_csv_with_quoted_fields_should_run_as_expected():
     content = (
         "student_id,name,course\n"
@@ -66,9 +46,6 @@ def test_csv_with_quoted_fields_should_run_as_expected():
         {"student_id": "5678", "name": "Student 2", "course": "Course 2"},
     ]
     assert result == expected
-
-
-# CSVREADER: READ_S3 TESTS
 
 
 def setup_s3(s3_client, bucket: str, key: str, content: str):

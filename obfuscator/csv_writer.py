@@ -3,7 +3,6 @@ import io
 from typing import List, Dict
 from obfuscator.logger import get_logger
 
-# Create the logger
 logger = get_logger("CSVWRITER")
 
 

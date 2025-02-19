@@ -1,6 +1,5 @@
 from obfuscator.read import DataReader
 from obfuscator.write import DataWriter
-from obfuscator.utils import Utilities
 from obfuscator.obfuscate import obfuscate
 from typing import List
 
@@ -8,8 +7,6 @@ from typing import List
 def main(s3_source: str, pii_fields: List[str], log_level: str = "INFO") -> bytes:
     reader = DataReader(log_level)
     writer = DataWriter()
-    utilities = Utilities()
-    source = utilities.get_source(s3_source)
-    data = reader.read_string(source)
+    data = reader.read_s3(s3_source)
     obfuscated_data = obfuscate(data, pii_fields)
     return writer.create_byte_stream(obfuscated_data)

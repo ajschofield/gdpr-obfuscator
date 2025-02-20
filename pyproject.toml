@@ -2,13 +2,13 @@
 name = "gdpr-obfuscator"
 version = "0.1.0"
 description = "A Python library designed to detect and remove Personally Identifiable Information (PII) from CSV files stored in an AWS S3 bucket."
-authors = [{ name = "Alex Schofield", email = "git@ajschof.me" }]
+authors = ["Alex Schofield <git@ajschof.me>"]
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = ["tabulate (>=0.9.0,<0.10.0)", "boto3 (>=1.36.22,<2.0.0)"]
 
 [tool.poetry]
-package-mode = false
+package-mode = true
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.4"

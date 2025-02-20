@@ -9,6 +9,9 @@ dependencies = ["tabulate (>=0.9.0,<0.10.0)", "boto3 (>=1.36.22,<2.0.0)"]
 
 [tool.poetry]
 package-mode = true
+packages = [
+    { include = "gdpr_obfuscator"}
+]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "8.3.4"

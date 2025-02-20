@@ -1,8 +1,8 @@
 import argparse
-from obfuscator.read import DataReader
-from obfuscator.write import DataWriter
-from obfuscator.obfuscate import obfuscate
-from obfuscator.logger import get_logger
+from gdpr_obfuscator.read import DataReader
+from gdpr_obfuscator.write import DataWriter
+from gdpr_obfuscator.obfuscate import obfuscate
+from gdpr_obfuscator.logger import get_logger
 
 
 def main():

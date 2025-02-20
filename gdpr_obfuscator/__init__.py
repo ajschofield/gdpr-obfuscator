@@ -1,12 +1,17 @@
 from .read import DataReader
-from .write import DataWriter
 from .obfuscate import obfuscate
-from typing import List
+from .logger import get_logger
+from typing import List, Dict
 
+class ImportData:
+    def __init__(self, verbosity: bool = False):
+        self.verbosity = verbosity
+        self.log_level = "DEBUG" if verbosity else "INFO"
+        self.logger = get_logger("ImportData", self.log_level)
+        self.reader = DataReader()
 
-def main(s3_source: str, pii_fields: List[str], log_level: str = "INFO") -> bytes:
-    reader = DataReader(log_level)
-    writer = DataWriter()
-    data = reader.read_s3(s3_source)
-    obfuscated_data = obfuscate(data, pii_fields)
-    return writer.create_byte_stream(obfuscated_data)
+    def import_s3(self, path: str, pii_fields: List[str]) -> bytes:
+        return self.reader.read_s3(path)
+
+    def import_local(self, path: str, pii_fields: List[str]) -> bytes:
+        return self.reader.read_local(path)

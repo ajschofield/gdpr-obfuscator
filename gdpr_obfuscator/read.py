@@ -43,20 +43,7 @@ class DataReader:
         bucket, key = utils.get_s3_path(path)
         self.logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
 
-        if os.getenv("LOCALSTACK", "FALSE").upper() == "TRUE":
-            localstack_endpoint = "http://localhost.localstack.cloud:4566"
-            self.logger.debug(
-                "Using LocalStack endpoint for S3 - ensure LocalStack is running"
-            )
-            client = boto3.client(
-                "s3",
-                endpoint_url=localstack_endpoint,
-                aws_access_key_id="dummy",
-                aws_secret_access_key="dummy",
-            )
-            self.logger.debug(f"endpoint_url: {localstack_endpoint}")
-        else:
-            client = boto3.client("s3")
+        client = boto3.client("s3")
 
         try:
             response = client.get_object(Bucket=bucket, Key=key)

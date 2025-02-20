@@ -1,6 +1,6 @@
-from obfuscator.read import DataReader
-from obfuscator.write import DataWriter
-from obfuscator.obfuscate import obfuscate
+from .read import DataReader
+from .write import DataWriter
+from .obfuscate import obfuscate
 from typing import List
 
 

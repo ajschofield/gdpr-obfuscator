@@ -1,5 +1,5 @@
 # Utility functions
-from obfuscator.logger import get_logger
+from logger import get_logger
 
 
 class Utilities:

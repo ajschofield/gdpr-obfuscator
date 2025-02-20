@@ -3,8 +3,8 @@ import io
 import boto3
 import os
 from typing import List, Dict
-from obfuscator.logger import get_logger
-from obfuscator.utils import Utilities
+from .logger import get_logger
+from .utils import Utilities
 
 
 class DataReader:

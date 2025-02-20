@@ -1,7 +1,6 @@
 import csv
 import io
 import boto3
-import os
 from typing import List, Dict
 from .logger import get_logger
 from .utils import Utilities

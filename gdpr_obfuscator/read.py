@@ -49,7 +49,8 @@ class DataReader:
             response = client.get_object(Bucket=bucket, Key=key)
             self.logger.info("S3 object read successfully")
             content = response["Body"].read().decode("utf-8")
-            return self.read_string(content)
+            read_csv_content = self.read_string(content)
+            return utils.create_byte_stream(read_csv_content)
         except client.exceptions.NoSuchKey:
             self.logger.error(f"Object not found: {bucket}/{key}")
             raise

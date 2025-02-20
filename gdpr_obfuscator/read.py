@@ -2,7 +2,6 @@ import csv
 import io
 import boto3
 from typing import List, Dict
-from .logger import get_logger
 from .utils import Utilities
 
 
@@ -13,8 +12,9 @@ class DataReader:
     """
 
     def __init__(self, log_level=None):
+        self.utils = Utilities(self.log_level)
         self.log_level = log_level
-        self.logger = get_logger("CSVREADER", log_level)
+        self.logger = self.utils.get_logger("CSVREADER", log_level)
 
     def read_local(self, path) -> List[Dict[str, str]]:
         """
@@ -38,8 +38,7 @@ class DataReader:
         A method to read an S3 object containing CSV data
         and return the data as a list of dictionaries.
         """
-        utils = Utilities(self.log_level)
-        bucket, key = utils.get_s3_path(path)
+        bucket, key = self.utils.get_s3_path(path)
         self.logger.debug(f"Reading S3 CSV from: {bucket}/{key}")
 
         client = boto3.client("s3")
@@ -49,7 +48,7 @@ class DataReader:
             self.logger.info("S3 object read successfully")
             content = response["Body"].read().decode("utf-8")
             read_csv_content = self.read_string(content)
-            return utils.create_byte_stream(read_csv_content)
+            return self.utils.create_byte_stream(read_csv_content)
         except client.exceptions.NoSuchKey:
             self.logger.error(f"Object not found: {bucket}/{key}")
             raise

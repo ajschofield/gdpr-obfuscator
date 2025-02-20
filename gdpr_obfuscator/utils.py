@@ -1,13 +1,36 @@
-# Utility functions
-from .logger import get_logger
-from typing import List, Dict
 import csv
 import io
+import logging
+import Enum
+from typing import List, Dict
 
 
 class Utilities:
+    class LogLevel(Enum):
+        DEBUG = logging.DEBUG
+        INFO = logging.INFO
+        WARNING = logging.WARNING
+        ERROR = logging.ERROR
+        CRITICAL = logging.CRITICAL
+
+    @staticmethod
+    def get_logger(name: str, level: "Utilities.LogLevel" = None) -> logging.Logger:
+        level = level or Utilities.LogLevel.INFO
+        logger = logging.getLogger(name)
+        if logger.hasHandlers():
+            logger.handlers.clear()
+
+        handler = logging.StreamHandler()
+        logger.setLevel(level.value)
+        formatter = logging.Formatter(
+            "[%(asctime)s] - %(levelname)s::%(name)s - %(message)s"
+        )
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
+        return logger
+
     def __init__(self, logger=None):
-        self.logger = get_logger("UTILITIES", logger)
+        self.logger = self.get_logger(__name__, logger)
 
     def get_s3_path(self, uri):
         parts = uri.replace("s3://", "").split("/")

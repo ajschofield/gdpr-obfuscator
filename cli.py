@@ -1,11 +1,13 @@
 import argparse
 from gdpr_obfuscator.read import DataReader
-from gdpr_obfuscator.write import DataWriter
 from gdpr_obfuscator.obfuscate import obfuscate
-from gdpr_obfuscator.logger import get_logger
+from gdpr_obfuscator.utils import Utilities
 
 
 def main():
+
+    utils = Utilities()
+
     parser = argparse.ArgumentParser(
         prog="GDPR-Obfuscator",
         description="Obfuscate sensitive data stored locally or in an AWS environment",
@@ -30,7 +32,7 @@ def main():
     args = parser.parse_args()
 
     log_level = "DEBUG" if args.verbose else "INFO"
-    logger = get_logger("CLI", log_level)
+    logger = utils.get_logger("CLI", log_level)
 
     reader = DataReader(log_level)
 
@@ -43,9 +45,7 @@ def main():
 
     obfuscated_data = obfuscate(data, args.pii)
 
-    writer = DataWriter()
-
-    return writer.create_byte_stream(obfuscated_data)
+    return obfuscated_data
 
 
 if __name__ == "__main__":

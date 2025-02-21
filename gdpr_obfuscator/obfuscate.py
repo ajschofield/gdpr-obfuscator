@@ -1,7 +1,7 @@
 from typing import List, Dict
-from .logger import get_logger
+from .utils import Utilities
 
-logger = get_logger("OBFUSCATE")
+logger = Utilities.get_logger("OBFUSCATE")
 
 
 def obfuscate(

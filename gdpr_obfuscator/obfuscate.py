@@ -1,7 +1,7 @@
 from typing import List, Dict
 
 
-def obfuscate(
+def obfuscate_data(
     data: List[Dict[str, str]], pii_fields: List[str]
 ) -> List[Dict[str, str]]:
     """

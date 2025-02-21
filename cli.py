@@ -1,6 +1,5 @@
 import argparse
-from gdpr_obfuscator.read import DataReader
-from gdpr_obfuscator.obfuscate import obfuscate
+from gdpr_obfuscator import Obfuscator
 
 
 def main():
@@ -28,14 +27,12 @@ def main():
 
     args = parser.parse_args()
 
-    reader = DataReader()
+    obfuscator = Obfuscator()
 
     if args.local and not args.s3:
-        data = reader.read_local(args.local)
+        obfuscated_data = obfuscator.process_local(args.local, args.pii)
     else:
-        data = reader.read_s3(args.s3)
-
-    obfuscated_data = obfuscate(data, args.pii)
+        obfuscated_data = obfuscator.process_s3(args.s3, args.pii)
 
     print(obfuscated_data)
 

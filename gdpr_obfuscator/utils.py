@@ -8,13 +8,15 @@ class Utilities:
     def __init__(self, logger=None):
         pass
 
-    def get_s3_path(self, uri):
+    @staticmethod
+    def get_s3_path(uri):
         parts = uri.replace("s3://", "").split("/")
         bucket = parts.pop(0)
         key = "/".join(parts)
         return bucket, key
 
-    def create_byte_stream(self, data: List[Dict[str, str]]) -> bytes:
+    @staticmethod
+    def create_byte_stream(data: List[Dict[str, str]]) -> bytes:
         if not data:
             return b""
 

@@ -37,7 +37,8 @@ class DataReader:
         read_csv_content = self.read_string(content)
         return read_csv_content
 
-    def read_string(self, content: str) -> List[Dict[str, str]]:
+    @staticmethod
+    def read_string(content: str) -> List[Dict[str, str]]:
         """
         A method to read CSV data from a string and return the data as a list
         of dictionaries.

@@ -1,6 +1,9 @@
 import argparse
 from gdpr_obfuscator import Obfuscator
 
+# This is a simple CLI for demonstration and doesn't undergo the same level
+# of testing as the core library.
+
 
 def main():
 

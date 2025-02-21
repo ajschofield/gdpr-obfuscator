@@ -17,6 +17,9 @@ class Utilities:
 
     def create_byte_stream(self, data: List[Dict[str, str]]) -> bytes:
 
+        if not data:
+            return b""
+
         output = io.StringIO()
 
         headers = list(data[0].keys())

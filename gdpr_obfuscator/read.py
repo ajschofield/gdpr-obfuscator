@@ -2,6 +2,7 @@ import csv
 import io
 import boto3
 from typing import List, Dict
+from .utils import Utilities
 
 
 class DataReader:
@@ -11,7 +12,7 @@ class DataReader:
     """
 
     def __init__(self):
-        pass
+        self.utils = Utilities()
 
     def read_local(self, path) -> List[Dict[str, str]]:
         """

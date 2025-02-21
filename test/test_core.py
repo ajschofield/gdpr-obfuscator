@@ -5,6 +5,8 @@ import boto3
 import csv
 import random
 
+obfuscator = Obfuscator()
+
 
 def setup_s3(s3_client, bucket: str, key: str, content: str):
     s3_client.create_bucket(
@@ -20,19 +22,16 @@ def s3_client():
         yield boto3.client("s3", "eu-west-2")
 
 
-obfuscator = Obfuscator()
-
-
 def test_main_integration():
     with mock_aws():
         s3 = boto3.client("s3", region_name="eu-west-2")
         bucket = "test-bucket"
         key = "data/mock.csv"
 
-        with open("mock_data.csv", "r") as f:
+        with open("test/data/mock_data.csv", "r") as f:
             csv_content = f.read()
 
-        with open("mock_data.csv", "r") as f:
+        with open("test/data/mock_data.csv", "r") as f:
             reader = list(csv.DictReader(f))
             rand_row = random.randint(0, len(reader) - 1)
             rand_name = reader[rand_row]["name"]

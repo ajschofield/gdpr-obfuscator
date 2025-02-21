@@ -4,7 +4,6 @@ from gdpr_obfuscator.obfuscate import obfuscate
 
 
 def main():
-
     parser = argparse.ArgumentParser(
         prog="GDPR-Obfuscator",
         description="Obfuscate sensitive data stored locally or in an AWS environment",

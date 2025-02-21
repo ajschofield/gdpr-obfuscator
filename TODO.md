@@ -2,6 +2,8 @@
 - [ ] Accept JSON string as input
 - [ ] Add support for JSON input data
 - [ ] Restore logging in a cleaner more centralised way
+- [ ] Write project documentation (README.md)
+- [ ] Improve language and detail in docstrings (autoDocstring - VSCode)
 
 # Medium Priority
 - [ ] Add custom exceptions (`exc.py`) and improve error handling

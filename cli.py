@@ -3,7 +3,6 @@ from gdpr_obfuscator import Obfuscator
 
 
 def main():
-
     parser = argparse.ArgumentParser(
         prog="GDPR-Obfuscator",
         description="Obfuscate sensitive data stored locally or in an AWS environment",

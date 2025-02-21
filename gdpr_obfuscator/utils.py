@@ -5,7 +5,6 @@ from typing import List, Dict
 
 
 class Utilities:
-
     def __init__(self, logger=None):
         pass
 
@@ -16,7 +15,6 @@ class Utilities:
         return bucket, key
 
     def create_byte_stream(self, data: List[Dict[str, str]]) -> bytes:
-
         if not data:
             return b""
 

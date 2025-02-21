@@ -1,4 +1,4 @@
-from obfuscator.obfuscate import obfuscate
+from gdpr_obfuscator.obfuscate import obfuscate_data
 
 
 def test_obfuscate_data_with_valid_pii_fields():
@@ -32,7 +32,7 @@ def test_obfuscate_data_with_valid_pii_fields():
         },
     ]
 
-    result = obfuscate(data, pii_fields)
+    result = obfuscate_data(data, pii_fields)
     assert result == expected
 
 
@@ -57,7 +57,7 @@ def test_obfuscate_data_with_missing_pii_field():
         },
     ]
 
-    result = obfuscate(data, pii_fields)
+    result = obfuscate_data(data, pii_fields)
     assert result == expected
 
 
@@ -66,7 +66,7 @@ def test_obfuscate_data_with_no_data():
     pii_fields = ["name", "email_address"]
     expected = []
 
-    result = obfuscate(data, pii_fields)
+    result = obfuscate_data(data, pii_fields)
     assert result == expected
 
 
@@ -82,5 +82,5 @@ def test_obfuscate_data_with_empty_pii_fields():
     pii_fields = []
     expected = data.copy()
 
-    result = obfuscate(data, pii_fields)
+    result = obfuscate_data(data, pii_fields)
     assert result == expected

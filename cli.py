@@ -1,12 +1,9 @@
 import argparse
 from gdpr_obfuscator.read import DataReader
 from gdpr_obfuscator.obfuscate import obfuscate
-from gdpr_obfuscator.utils import Utilities
 
 
 def main():
-
-    utils = Utilities()
 
     parser = argparse.ArgumentParser(
         prog="GDPR-Obfuscator",
@@ -31,21 +28,16 @@ def main():
 
     args = parser.parse_args()
 
-    log_level = "DEBUG" if args.verbose else "INFO"
-    logger = utils.get_logger("CLI", log_level)
-
-    reader = DataReader(log_level)
+    reader = DataReader()
 
     if args.local and not args.s3:
-        logger.debug("Read data from local path")
         data = reader.read_local(args.local)
     else:
-        logger.debug("Read data from S3")
         data = reader.read_s3(args.s3)
 
     obfuscated_data = obfuscate(data, args.pii)
 
-    return obfuscated_data
+    print(obfuscated_data)
 
 
 if __name__ == "__main__":

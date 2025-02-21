@@ -19,12 +19,8 @@ class DataReader:
         dictionaries.
         """
 
-        try:
-            with open(path, mode="r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                return [dict(row) for row in reader]
-        except Exception as e:
-            pass
+        with open(path, mode="r", encoding="utf-8") as f:
+            return self.read_string(f.read())
 
     def read_s3(self, path) -> List[Dict[str, str]]:
         """
@@ -38,7 +34,7 @@ class DataReader:
         response = client.get_object(Bucket=bucket, Key=key)
         content = response["Body"].read().decode("utf-8")
         read_csv_content = self.read_string(content)
-        return self.utils.create_byte_stream(read_csv_content)
+        return read_csv_content
 
     def read_string(self, content: str) -> List[Dict[str, str]]:
         """

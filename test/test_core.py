@@ -72,3 +72,32 @@ def test_imported_module_completes_in_under_one_minute():
     end = time.time()
 
     assert end - start < 60
+
+
+def test_output_compatible_with_s3_put_object():
+    with mock_aws():
+        s3 = boto3.client("s3", region_name="eu-west-2")
+        bucket = "test-bucket"
+        key = "data/mock.csv"
+        output_key = "data/obfuscated.csv"
+
+        with open("test/data/mock_data.csv", "r") as f:
+            csv_content = f.read()
+
+        setup_s3(s3, bucket, key, csv_content)
+        path = f"s3://{bucket}/{key}"
+
+        json_input = json.dumps({"file_path": path, "pii_fields": ["name"]})
+        result_bytes = obfuscator.process_s3(json_input)
+
+        try:
+            response = s3.put_object(Bucket=bucket, Key=output_key, Body=result_bytes)
+            assert response["ResponseMetadata"]["HTTPStatusCode"] == 200
+
+            get_response = s3.get_object(Bucket=bucket, Key=output_key)
+            retrieved_content = get_response["Body"].read()
+
+            assert retrieved_content == result_bytes
+
+        except Exception as e:
+            pytest.fail(f"put_object did not like the output from process_s3: {e}")

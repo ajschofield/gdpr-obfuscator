@@ -2,11 +2,20 @@ import csv
 import io
 from enum import Enum
 from typing import List, Dict
+import json
 
 
 class Utilities:
-    def __init__(self, logger=None):
-        pass
+
+    def process_json_input(json_input: str):
+        data = json.loads(json_input)
+
+        if not data.get("file_path") or not data.get("pii_fields"):
+            raise ValueError(
+                "Missing required file_path & pii_fields entries in JSON input"
+            )
+
+        return data["file_path"], data["pii_fields"]
 
     @staticmethod
     def get_s3_path(uri):

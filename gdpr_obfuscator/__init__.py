@@ -18,8 +18,3 @@ class Obfuscator:
         path, pii_fields = self.utils.process_json_input(input)
         obfuscated_data = obfuscate_data(self.reader.read_local(path), pii_fields)
         return self.utils.create_byte_stream(obfuscated_data)
-
-
-class ExportTool:
-    def __init__(self):
-        pass

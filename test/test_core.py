@@ -5,6 +5,7 @@ import boto3
 import csv
 import random
 import json
+import time
 
 obfuscator = Obfuscator()
 
@@ -47,3 +48,27 @@ def test_imported_module_runs_successfully_with_local_data():
     result_str = result.decode("utf-8")
 
     assert rand_name not in result_str
+
+
+def test_imported_module_completes_in_under_one_minute():
+    with mock_aws():
+        s3 = boto3.client("s3", region_name="eu-west-2")
+        bucket = "test-bucket"
+        key = "data/large_dataset.csv"
+
+        with open("test/data/large_dataset.csv", "r") as f:
+            csv_content = f.read()
+
+        setup_s3(s3, bucket, key, csv_content)
+
+        path = f"s3://{bucket}/{key}"
+
+    json_input = json.dumps(
+        {"file_path": path, "pii_fields": ["full_name", "email_address"]}
+    )
+
+    start = time.time()
+    obfuscator.process_s3(json_input)
+    end = time.time()
+
+    assert end - start < 60

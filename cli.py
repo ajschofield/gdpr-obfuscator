@@ -12,10 +12,6 @@ def main():
         description="Obfuscate sensitive data stored locally or in an AWS environment",
     )
 
-    parser.add_argument(
-        "-v", "--verbose", action="store_true", help="Enable verbose logging"
-    )
-
     loc = parser.add_mutually_exclusive_group(required=True)
     loc.add_argument("-l", "--local", help="Local path to file")
     loc.add_argument("-s", "--s3", help="URI path to file stored in S3")

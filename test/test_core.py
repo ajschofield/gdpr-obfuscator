@@ -4,6 +4,7 @@ from moto import mock_aws
 import boto3
 import csv
 import random
+import json
 
 obfuscator = Obfuscator()
 
@@ -40,7 +41,9 @@ def test_main_integration():
 
         path = f"s3://{bucket}/{key}"
 
-    result = obfuscator.process_s3(path, ["name"])
+    json_input = json.dumps({"file_path": path, "pii_fields": ["name"]})
+
+    result = obfuscator.process_s3(json_input)
     result_str = result.decode("utf-8")
 
     assert rand_name not in result_str

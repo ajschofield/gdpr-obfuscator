@@ -23,7 +23,7 @@ def s3_client():
         yield boto3.client("s3", "eu-west-2")
 
 
-def test_main_integration():
+def test_imported_module_runs_successfully_with_local_data():
     with mock_aws():
         s3 = boto3.client("s3", region_name="eu-west-2")
         bucket = "test-bucket"

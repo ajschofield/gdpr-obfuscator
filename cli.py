@@ -1,4 +1,5 @@
 import argparse
+import json
 from gdpr_obfuscator import Obfuscator
 
 # This is a simple CLI for demonstration and doesn't undergo the same level
@@ -31,10 +32,17 @@ def main():
 
     obfuscator = Obfuscator()
 
+    json_input = json.dumps(
+        {
+            "file_path": args.local if args.local else args.s3,
+            "pii_fields": args.pii,
+        }
+    )
+
     if args.local and not args.s3:
-        obfuscated_data = obfuscator.process_local(args.local, args.pii)
+        obfuscated_data = obfuscator.process_local(json_input)
     else:
-        obfuscated_data = obfuscator.process_s3(args.s3, args.pii)
+        obfuscated_data = obfuscator.process_s3(json_input)
 
     print(obfuscated_data)
 

@@ -6,7 +6,7 @@ import json
 
 
 class Utilities:
-
+    @staticmethod
     def process_json_input(json_input: str):
         data = json.loads(json_input)
 

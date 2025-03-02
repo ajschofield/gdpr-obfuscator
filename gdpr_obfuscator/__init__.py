@@ -1,7 +1,6 @@
 from .read import FileHandler
 from .obfuscate import obfuscate_data
 from .utils import Utilities
-from typing import List
 
 
 class Obfuscator:

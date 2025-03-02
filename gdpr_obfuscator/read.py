@@ -14,21 +14,21 @@ class FileHandler:
     def __init__(self):
         self.utils = Utilities()
 
-    def read_local(self, path) -> List[Dict[str, str]]:
+    def read_local(self, file_path) -> List[Dict[str, str]]:
         """
         A method to read a local CSV file and return the data as a list of
         dictionaries.
         """
 
-        with open(path, mode="r", encoding="utf-8") as f:
+        with open(file_path, mode="r", encoding="utf-8") as f:
             return self.read_string(f.read())
 
-    def read_s3(self, path) -> List[Dict[str, str]]:
+    def read_s3(self, file_path) -> List[Dict[str, str]]:
         """
         A method to read an S3 object containing CSV data
         and return the data as a list of dictionaries.
         """
-        bucket, key = self.utils.get_s3_path(path)
+        bucket, key = self.utils.get_s3_path(file_path)
 
         client = boto3.client("s3")
 

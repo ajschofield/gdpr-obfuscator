@@ -1,4 +1,4 @@
-from .read import DataReader
+from .read import FileHandler
 from .obfuscate import obfuscate_data
 from .utils import Utilities
 from typing import List
@@ -6,7 +6,7 @@ from typing import List
 
 class Obfuscator:
     def __init__(self):
-        self.reader = DataReader()
+        self.reader = FileHandler()
         self.utils = Utilities()
 
     def process_s3(self, input: str) -> bytes:

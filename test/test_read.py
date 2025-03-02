@@ -1,9 +1,9 @@
 import boto3
 from moto import mock_aws
-from gdpr_obfuscator.read import DataReader
+from gdpr_obfuscator.read import FileHandler
 import pytest
 
-reader = DataReader()
+reader = FileHandler()
 
 
 def test_empty_csv_should_return_no_content():

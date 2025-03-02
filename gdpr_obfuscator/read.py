@@ -5,7 +5,7 @@ from typing import List, Dict
 from .utils import Utilities
 
 
-class DataReader:
+class FileHandler:
     """
     A class to read CSV data from a local file, S3 object, or string. Near
     the project completion, support for JSON/Parquet files will be added.

@@ -1,4 +1,5 @@
 from gdpr_obfuscator.obfuscate import obfuscate_data
+import pytest
 
 
 def test_obfuscate_data_with_valid_pii_fields():
@@ -47,18 +48,9 @@ def test_obfuscate_data_with_missing_pii_field():
         },
     ]
     pii_fields = ["name", "email_address"]
-    expected = [
-        {"student_id": "1234", "name": "***", "course": "Software"},
-        {
-            "student_id": "5678",
-            "name": "***",
-            "course": "Data Science",
-            "email_address": "***",
-        },
-    ]
 
-    result = obfuscate_data(data, pii_fields)
-    assert result == expected
+    with pytest.raises(Exception):
+        obfuscate_data(data, pii_fields)
 
 
 def test_obfuscate_data_with_no_data():

@@ -5,8 +5,17 @@ def obfuscate_data(
     data: List[Dict[str, str]], pii_fields: List[str]
 ) -> List[Dict[str, str]]:
     """
-    A function to obfuscate PII fields in a list of dictionaries, replacing
-    sensitive values with a string of asterisks.
+
+
+    Args:
+        data (List[Dict[str, str]]): _description_
+        pii_fields (List[str]): _description_
+
+    Raises:
+        ValueError: _description_
+
+    Returns:
+        List[Dict[str, str]]: _description_
     """
 
     for record in data:

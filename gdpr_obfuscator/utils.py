@@ -1,12 +1,12 @@
 import csv
 import io
-from typing import List, Dict
+from typing import List, Dict, Tuple
 import json
 
 
 class Utilities:
     @staticmethod
-    def process_json_input(json_input: str):
+    def process_json_input(json_input: str) -> Tuple[str, List[str]]:
         data = json.loads(json_input)
 
         if not data.get("file_path") or not data.get("pii_fields"):
@@ -17,7 +17,7 @@ class Utilities:
         return data["file_path"], data["pii_fields"]
 
     @staticmethod
-    def get_s3_path(uri):
+    def get_s3_path(uri) -> Tuple[str, str]:
         parts = uri.replace("s3://", "").split("/")
         bucket = parts.pop(0)
         key = "/".join(parts)

@@ -1,6 +1,5 @@
 import csv
 import io
-from enum import Enum
 from typing import List, Dict
 import json
 

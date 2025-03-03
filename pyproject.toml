@@ -1,6 +1,6 @@
 [project]
 name = "gdpr-obfuscator"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Python library designed to detect and remove Personally Identifiable Information (PII) from CSV files stored in an AWS S3 bucket."
 authors = [{ name = "Alex Schofield", email = "git@ajschof.me>"}]
 readme = "README.md"

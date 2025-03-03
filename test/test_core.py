@@ -99,5 +99,7 @@ def test_output_compatible_with_s3_put_object():
 
             assert retrieved_content == result_bytes
 
+        # Shouldn't reach this point but catch and fail anyway
+
         except Exception as e:
             pytest.fail(f"put_object did not like the output from process_s3: {e}")

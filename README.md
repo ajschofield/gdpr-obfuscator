@@ -6,6 +6,8 @@
 4. [Setup](#setup)
     1. [Prerequisites](#prerequisites)
     2. [Installation](#installation)
+        1. [Source](#from-source)
+        2. [Prebuilt Package](#from-pypi)
 5. [Usage](#usage)
 
 ## Overview
@@ -31,20 +33,23 @@ This meets the requirements under the General Data Protection Regulation [(GDPR)
 
 ### Installation
 
-1. Clone the repository:
+There are two ways to install the package:
+
+#### Source
 
 ```bash
 git clone https://github.com/ajschofield/gdpr-obfuscator.git
 cd gdpr-obfuscator
+poetry install
 ```
 
-2. Install dependencies using poetry
+#### Prebuilt Package
+
+Download the latest release from [here](https://github.com/ajschofield/gdpr-obfuscator/releases/latest) and install using `pip`:
 
 ```bash
-# Production
-poetry install
-# Developer (optional)
-poetry install --dev
+# Package name may be different to what is below
+pip install gdpr_obfuscator-0.1.0-py3-none-any.whl
 ```
 
 ## Usage

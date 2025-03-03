@@ -59,10 +59,23 @@ class FileHandler:
 
         client = boto3.client("s3")
 
-        response = client.get_object(Bucket=bucket, Key=key)
-        content = response["Body"].read().decode("utf-8")
-        read_csv_content = self.read_string(content)
-        return read_csv_content
+        try:
+            response = client.get_object(Bucket=bucket, Key=key)
+        except client.exceptions.NoSuchKey:
+            raise ValueError(f"File not found in S3 bucket: {bucket}/{key}")
+        except client.exceptions.NoSuchBucket:
+            raise ValueError(f"Bucket not found in S3: {bucket}")
+        except client.exceptions.ClientError as e:
+            raise ValueError(f"Error accessing S3: {e}")
+
+        try:
+            content = response["Body"].read().decode("utf-8")
+        except UnicodeDecodeError:
+            raise ValueError("File is not UTF-8 encoded or malformed")
+        except Exception as e:
+            raise ValueError(f"Error reading file from S3: {e}")
+
+        return self.read_string(content)
 
     @staticmethod
     def read_string(content: str) -> List[Dict[str, str]]:

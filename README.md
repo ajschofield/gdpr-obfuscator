@@ -1,15 +1,5 @@
 # GDPR Obfuscator - Launchpad Project
 
-1. [Overview](#overview)
-2. [Minimum Viable Product (MVP)](#minimum-viable-product-mvp)
-    1. [Additional Features](#additional-features)
-4. [Setup](#setup)
-    1. [Prerequisites](#prerequisites)
-    2. [Installation](#installation)
-        1. [Source](#from-source)
-        2. [Prebuilt Package](#from-pypi)
-5. [Usage](#usage)
-
 ## Overview
 
 A Python library designed to detect and remove Personally Identifiable Information (PII) from CSV files stored in an AWS S3 bucket.

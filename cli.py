@@ -40,7 +40,7 @@ def main():
     else:
         obfuscated_data = obfuscator.process_s3(json_input)
 
-    print(obfuscated_data)
+    print(obfuscated_data.decode("utf-8"))
 
 
 if __name__ == "__main__":

@@ -9,10 +9,10 @@ def mock_obfuscator():
     with patch("cli.Obfuscator") as MockObfuscator:
         mock_instance = MockObfuscator.return_value
         mock_instance.process_local.return_value = (
-            '{"status": "success", "data": "local_obfuscated_data"}'
+            b'{"status": "success", "data": "local_obfuscated_data"}'
         )
         mock_instance.process_s3.return_value = (
-            '{"status": "success", "data": "s3_obfuscated_data"}'
+            b'{"status": "success", "data": "s3_obfuscated_data"}'
         )
         yield mock_instance
 

@@ -5,7 +5,7 @@ def obfuscate_data(
     data: List[Dict[str, str]], pii_fields: List[str]
 ) -> List[Dict[str, str]]:
     """
-
+    Obfuscate sensitive fields in a list of dictionaries using user-provided PII fields.
 
     Args:
         data (List[Dict[str, str]]): _description_
